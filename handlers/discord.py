@@ -25,7 +25,7 @@ class DiscordHandler:
 
     
     def send_admin_message(self, message):
-        today = datetime.today().strftime('%Y-%m-%d %H:%m')
+        today = datetime.utcnow().strftime('%Y-%m-%d %H:%M')
         _, user, command = self.extract_data_from_admin_log(message)
         admin_embed = DiscordEmbed(
             title=user, 
@@ -36,8 +36,6 @@ class DiscordHandler:
             color="FF0000",
             timestamp=today)
         
-        print(user)
-        print(command)
         self.send_message(embed=admin_embed)
 
     def send_messages_by_type(self, log_type, messages):
