@@ -15,6 +15,9 @@ class FTPHandler:
         self.ftp.connect(host=self.host, port=self.port)
         self.ftp.login(user=self.user, passwd=self.password)
 
+    def close_connection(self):
+        self.ftp.close()
+
     # Setters
     def set_current_directory_to_log_directory(self):
         self.ftp.cwd(self.path_to_logs)

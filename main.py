@@ -26,15 +26,20 @@ def write_log_to_discord_by_log_type(log_type):
     discord_handler.send_messages_by_type(log_type=log_type, messages=messages)
 
 def read_logs(scheduler): 
+    print('Making connection to host...')
+    ftp_handler.connect_and_login()
+    ftp_handler.set_current_directory_to_log_directory()
+
     print('Reading logs...')
     scheduler.enter(60, 1, read_logs, (scheduler,))
     
     write_log_to_discord_by_log_type(log_type=LOG_TYPE_ADMIN)
 
-def main():
-    ftp_handler.connect_and_login()
-    ftp_handler.set_current_directory_to_log_directory()
+    print('Closing connection to host...')
+    ftp_handler.close_connection()
 
+
+def main():
     log_read_scheduler.enter(60, 1, read_logs, (log_read_scheduler,))
     log_read_scheduler.run()
 
