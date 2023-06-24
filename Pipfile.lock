@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "7e14566041023a9da7f891ef8e63d24608a0a1b12461914cd0a29e11cc7cccae"
+            "sha256": "6080cd7498e7bc4f1eda3d92b1fed232467d863bc11f660b9d3587c633464536"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -112,13 +112,6 @@
             ],
             "index": "pypi",
             "version": "==1.1.0"
-        },
-        "ftputil": {
-            "hashes": [
-                "sha256:6889db8649dd20d9b6d40a6c5f0f84ccf340a7dac1e0bfc0f0024090fc2afb33"
-            ],
-            "index": "pypi",
-            "version": "==5.0.4"
         },
         "idna": {
             "hashes": [
