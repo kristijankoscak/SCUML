@@ -1,4 +1,4 @@
-import sched, time, argparse, sys
+import sched, time, argparse
 
 from handlers.ftp import FTPHandler
 from handlers.discord import DiscordHandler
