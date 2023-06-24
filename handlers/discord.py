@@ -1,5 +1,5 @@
 from datetime import datetime
-from log_reader import LOG_TYPE_ADMIN
+from handlers.log_reader import LOG_TYPE_ADMIN
 from discord_webhook import DiscordWebhook, DiscordEmbed
 
 

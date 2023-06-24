@@ -25,7 +25,7 @@ class LogReader:
         if log_type == LOG_TYPE_ADMIN:
             return self.admin_file_position
         
-    def get_messages_by_type(self, log_type, current_log_filename) -> list[str]:
+    def get_messages_by_type(self, log_type, current_log_filename):
         file_position = self.get_file_position_by_type(log_type=log_type)
         file = open('%s/%s'%(self.path_to_logs, current_log_filename), "r")
         messages = []
@@ -40,7 +40,7 @@ class LogReader:
         return messages
 
 
-    def get_messages_for_discord_by_type(self, log_type, current_log_filename) -> list[str]:
+    def get_messages_for_discord_by_type(self, log_type, current_log_filename):
         self.remove_old_logs(log_type=log_type, current_log_filename=current_log_filename)
 
         return self.get_messages_by_type(log_type=log_type, current_log_filename=current_log_filename)

@@ -5,7 +5,7 @@ class FTPHandler:
     ftp = FTP()
     path_to_logs = 'SCUM/Saved/SaveFiles/Logs'
 
-    def __init__(self, host, port, user, password) -> None:
+    def __init__(self, host, port, user, password):
         self.host = host
         self.port = port
         self.user = user
