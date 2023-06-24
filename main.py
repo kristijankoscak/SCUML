@@ -1,4 +1,4 @@
-import sched, time, argparse
+import sched, time, argparse, sys
 
 from handlers.ftp import FTPHandler
 from handlers.discord import DiscordHandler
@@ -7,11 +7,11 @@ from handlers.log_reader import LogReader, LOG_TYPE_ADMIN
 def get_command_line_arguments():
     parser = argparse.ArgumentParser()
 
-    parser.add_argument("webhook_url", type=str, default="")
-    parser.add_argument("host", type=str, default="")
-    parser.add_argument("port", type=int, default="00000")
-    parser.add_argument("user", type=str, default="")
-    parser.add_argument("password", type=str, default="")
+    parser.add_argument("-webhook_url", type=str, default="")
+    parser.add_argument("-host", type=str, default="")
+    parser.add_argument("-port", type=int, default="00000")
+    parser.add_argument("-user", type=str, default="")
+    parser.add_argument("-password", type=str, default="")
 
     args = parser.parse_args()
 
@@ -35,18 +35,15 @@ def main():
     ftp_handler.connect_and_login()
     ftp_handler.set_current_directory_to_log_directory()
 
-    #log_read_scheduler.enter(60, 1, read_logs, (log_read_scheduler,))
-    #log_read_scheduler.run()
-
-    write_log_to_discord_by_log_type(log_type=LOG_TYPE_ADMIN)
+    log_read_scheduler.enter(60, 1, read_logs, (log_read_scheduler,))
+    log_read_scheduler.run()
 
 if __name__ == "__main__":
-    # TODO reuse above variables instead of hardcoded values
-    #webhook_url, host, port, user, password = get_command_line_arguments();
+    webhook_url, host, port, user, password = get_command_line_arguments()
 
     log_reader = LogReader()
-    discord_handler = DiscordHandler(webhook_url="https://discord.com/api/webhooks/1119925532792995861/W5wdjKypB1mrLvs7_g6DXkNbrspkpAnxhzS1mVApx7N3g0M-tqv5bH0ijaTh2DVXNYzH")
+    discord_handler = DiscordHandler(webhook_url=webhook_url)
     log_read_scheduler = sched.scheduler(time.time, time.sleep)
-    ftp_handler = FTPHandler(host="176.57.173.175", port=51021, user="gpftp29875511127426533", password="F2uxTSmE")
+    ftp_handler = FTPHandler(host=host, port=port, user=user, password=password)
 
     main()
